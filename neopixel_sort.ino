@@ -23,6 +23,7 @@ void setup() {
     Serial.begin(9600);
     Serial.println("start");
     pixels.setBrightness(10);
+    randomSeed(analogRead(0));
 }
 
 void loop() {
@@ -168,7 +169,7 @@ void initialize() {
 
 void shuffle() {
     for (int i = 0; i < NUMPIXELS - 1; i++) {
-        int j = i + rand() / (RAND_MAX / (NUMPIXELS - i) + 1);
+        int j = i + random(1000) / (1000 / (NUMPIXELS - i) + 1);
         int t = m[j];
         m[j] = m[i];
         m[i] = t;

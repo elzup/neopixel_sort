@@ -37,6 +37,9 @@ void loop() {
     Serial.println("l");
 }
 
+/*
+ *  Sort algorism
+ */
 void bubbleSort() {
     REP(i, NUMPIXELS) {
         REP(j, NUMPIXELS - 1) {
@@ -46,6 +49,16 @@ void bubbleSort() {
         }
     }
     pixels.show();
+}
+
+/*
+ *  Matrix manage
+ */
+
+void initialize() {
+    REP(i, NUMPIXELS) {
+        m[i] = i;
+    }
 }
 
 void shuffle() {
@@ -71,19 +84,11 @@ void swap(int i, int j) {
         pixels.show();
         delay(delayval_q);
     }
-
     pixels.setPixelColor(i, pixels.Color(rgb2[0], rgb2[1], rgb2[2]));
     pixels.setPixelColor(j, pixels.Color(rgb1[0], rgb1[1], rgb1[2]));
     m[i] = t2;
     m[j] = t1;
 }
-
-void initialize() {
-    REP(i, NUMPIXELS) {
-        m[i] = i;
-    }
-}
-
 
 void showPixels() {
     REP(i, NUMPIXELS) {
@@ -96,6 +101,9 @@ void showPixels() {
     pixels.show();
 }
 
+/*
+ *  Helpers
+ */
 
 void h_to_rgb(int h, int *rgb) {
     float r = 0, g = 0, b = 0;

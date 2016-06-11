@@ -13,7 +13,7 @@ Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ80
 int delayval = 1000;
 int delayval_q = 1;
 int k = 0;
-int delayval_sp = 50;
+int delayval_sp = 70;
 
 int m[256];
 
@@ -45,6 +45,8 @@ void bubbleSort() {
         REP(j, NUMPIXELS - 1) {
             if (m[j] > m[j + 1]) {
                 swap(j, j + 1);
+            } else {
+                noswap();
             }
         }
     }
@@ -80,7 +82,8 @@ void swap(int i, int j) {
     h_to_rgb(m[j], rgb2);
     pixels.setPixelColor(i, pixels.Color(255, 255, 255));
     pixels.setPixelColor(j, pixels.Color(255, 255, 255));
-    if (k ++ % delayval_sp == 0) {
+    if (k ++ == delayval_sp) {
+        k = 0;
         pixels.show();
         delay(delayval_q);
     }
@@ -88,6 +91,13 @@ void swap(int i, int j) {
     pixels.setPixelColor(j, pixels.Color(rgb1[0], rgb1[1], rgb1[2]));
     m[i] = t2;
     m[j] = t1;
+}
+
+void noswap() {
+    if (k ++ == delayval_sp) {
+        k = 0;
+        delay(delayval_q);
+    }
 }
 
 void showPixels() {

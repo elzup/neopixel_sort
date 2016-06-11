@@ -14,6 +14,7 @@ int delayval = 1000;
 int delayval_q = 1;
 int k = 0;
 int delayval_sp = 70;
+// int delayval_sp = 70;
 
 int m[256];
 
@@ -25,9 +26,9 @@ void setup() {
 }
 
 void loop() {
-    bubbleSort();
-    // pixels.setPixelColor(i, pixels.Color(rgb[0], rgb[1], rgb[2]));
-    Serial.println("l");
+    // bubbleSort();
+    selectionSort();
+    Serial.println(".");
 }
 
 /*
@@ -41,9 +42,25 @@ void bubbleSort() {
             if (m[j] > m[j + 1]) {
                 swap(j, j + 1);
             } else {
-                noswap();
+                noswap(j, j + 1);
             }
         }
+    }
+    pixels.show();
+}
+
+void selectionSort() {
+    initialize();
+    shuffle();
+    REP(i, NUMPIXELS - 1) {
+        int sm = i;
+        for (int j = i + 1; j < NUMPIXELS; j++) {
+            if (m[j] < m[sm]) {
+                sm = j;
+            }
+            noswap(i, sm);
+        }
+        swap(i, sm);
     }
     pixels.show();
 }
@@ -71,13 +88,8 @@ void shuffle() {
 }
 
 void swap(int i, int j) {
-    Serial.println(i, j);
     int t1 = m[i];
     int t2 = m[j];
-    int rgb1[3];
-    h_to_rgb(m[i], rgb1);
-    int rgb2[3];
-    h_to_rgb(m[j], rgb2);
     pixels.setPixelColor(i, pixels.Color(255, 255, 255));
     pixels.setPixelColor(j, pixels.Color(255, 255, 255));
     if (k ++ == delayval_sp) {
@@ -85,17 +97,28 @@ void swap(int i, int j) {
         pixels.show();
         delay(delayval_q);
     }
+    int rgb1[3], rgb2[3];
+    h_to_rgb(m[i], rgb1);
+    h_to_rgb(m[j], rgb2);
     pixels.setPixelColor(i, pixels.Color(rgb2[0], rgb2[1], rgb2[2]));
     pixels.setPixelColor(j, pixels.Color(rgb1[0], rgb1[1], rgb1[2]));
     m[i] = t2;
     m[j] = t1;
 }
 
-void noswap() {
+void noswap(int i, int j) {
+    pixels.setPixelColor(i, pixels.Color(255, 255, 255));
+    pixels.setPixelColor(j, pixels.Color(255, 255, 255));
     if (k ++ == delayval_sp) {
         k = 0;
+        pixels.show();
         delay(delayval_q);
     }
+    int rgb1[3], rgb2[3];
+    h_to_rgb(m[i], rgb1);
+    h_to_rgb(m[j], rgb2);
+    pixels.setPixelColor(i, pixels.Color(rgb2[0], rgb2[1], rgb2[2]));
+    pixels.setPixelColor(j, pixels.Color(rgb1[0], rgb1[1], rgb1[2]));
 }
 
 void showPixels() {

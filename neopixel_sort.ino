@@ -25,13 +25,6 @@ void setup() {
 }
 
 void loop() {
-    initialize();
-    showPixels();
-    delay(delayval);
-    shuffle();
-    showPixels();
-    delay(delayval);
-
     bubbleSort();
     // pixels.setPixelColor(i, pixels.Color(rgb[0], rgb[1], rgb[2]));
     Serial.println("l");
@@ -41,8 +34,10 @@ void loop() {
  *  Sort algorism
  */
 void bubbleSort() {
+    initialize();
+    shuffle();
     REP(i, NUMPIXELS) {
-        REP(j, NUMPIXELS - 1) {
+        REP(j, NUMPIXELS - 1 - i) {
             if (m[j] > m[j + 1]) {
                 swap(j, j + 1);
             } else {
@@ -56,11 +51,12 @@ void bubbleSort() {
 /*
  *  Matrix manage
  */
-
 void initialize() {
     REP(i, NUMPIXELS) {
         m[i] = i;
     }
+    showPixels();
+    delay(delayval);
 }
 
 void shuffle() {
@@ -70,6 +66,8 @@ void shuffle() {
         m[j] = m[i];
         m[i] = t;
     }
+    showPixels();
+    delay(delayval);
 }
 
 void swap(int i, int j) {

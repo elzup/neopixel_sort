@@ -26,8 +26,9 @@ void setup() {
 }
 
 void loop() {
-    // bubbleSort();
+    bubbleSort();
     selectionSort();
+    quickSort();
     Serial.println(".");
 }
 
@@ -63,6 +64,40 @@ void selectionSort() {
         swap(i, sm);
     }
     pixels.show();
+}
+
+void quickSort() {
+    initialize();
+    shuffle();
+    revQuick(0, NUMPIXELS - 1);
+    pixels.show();
+}
+
+void revQuick(int left, int right) {
+    if (left >= right) {
+        return;
+    }
+    int i = left;
+    int j = right;
+    int pivot = m[left];
+    while (true) {
+        while (m[i] < pivot) {
+            noswap(i, left);
+            i++;
+        }
+        while (pivot < m[j]) {
+            noswap(left, j);
+            j--;
+        }
+        if (i >= j) {
+            break;
+        }
+        swap(i, j);
+        i ++;
+        j --;
+    }
+    revQuick(left, i - 1);
+    revQuick(j + 1, right);
 }
 
 /*
@@ -117,8 +152,8 @@ void noswap(int i, int j) {
     int rgb1[3], rgb2[3];
     h_to_rgb(m[i], rgb1);
     h_to_rgb(m[j], rgb2);
-    pixels.setPixelColor(i, pixels.Color(rgb2[0], rgb2[1], rgb2[2]));
-    pixels.setPixelColor(j, pixels.Color(rgb1[0], rgb1[1], rgb1[2]));
+    pixels.setPixelColor(i, pixels.Color(rgb1[0], rgb1[1], rgb1[2]));
+    pixels.setPixelColor(j, pixels.Color(rgb2[0], rgb2[1], rgb2[2]));
 }
 
 void showPixels() {

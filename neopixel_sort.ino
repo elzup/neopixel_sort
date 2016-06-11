@@ -161,7 +161,7 @@ void revMerge(int left, int right) {
  */
 void initialize() {
     REP(i, NUMPIXELS) {
-        m[i] = i;
+        m[i] = i * (360 / NUMPIXELS);
     }
     showPixels();
     delay(delayval);

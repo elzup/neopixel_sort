@@ -11,9 +11,9 @@
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
 int delayval = 1000;
-int delayval_q = 1;
+int delayval_q = 10;
 int k = 0;
-int delayval_sp = 70;
+int delayval_sp = 1;
 // int delayval_sp = 70;
 
 int m[256];
@@ -26,9 +26,10 @@ void setup() {
 }
 
 void loop() {
-    bubbleSort();
-    selectionSort();
-    quickSort();
+    // bubbleSort();
+    // selectionSort();
+    // quickSort();
+    mergeSort();
     Serial.println(".");
 }
 
@@ -100,6 +101,60 @@ void revQuick(int left, int right) {
     revQuick(j + 1, right);
 }
 
+void mergeSort() {
+    initialize();
+    shuffle();
+    revMerge(0, NUMPIXELS - 1);
+    pixels.show();
+}
+
+void revMerge(int left, int right) {
+    if (right - left <= 2) {
+        if (m[left] > m[right]) {
+            swap(left, right);
+        } else {
+            noswap(left, right);
+        }
+        return;
+    }
+    int middle = (left + right) / 2;
+    revMerge(left, middle);
+    revMerge(middle + 1, right);
+//  10 11 12 13 14
+//  [10] 11 (12)
+//  13 [14]
+    int sl1 = middle - left + 1;
+    int sl2 = right - middle;
+    int stack1[sl1 + 1], stack2[sl2 + 1];
+    for (int i = 0; i < sl1; i++) {
+        stack1[i] = m[left + i];
+        pixels.setPixelColor(left + i, pixels.Color(30, 30, 30));
+    }
+    stack1[sl1] = 256;
+    stack2[sl2] = 256;
+    for (int i = 0; i < sl2; i++) {
+        stack2[i] = m[middle + 1 + i];
+        pixels.setPixelColor(middle + 1 + i, pixels.Color(30, 30, 30));
+    }
+    showup();
+    int i1 = 0, i2 = 0;
+    for (int i = left; i <= right; i++) {
+        int k = 0;
+        if (stack1[i1] < stack2[i2]) {
+            k = stack1[i1];
+            i1 ++;
+        } else {
+            k = stack2[i2];
+            i2 ++;
+        }
+        m[i] = k;
+        int rgb[3];
+        h_to_rgb(m[i], rgb);
+        pixels.setPixelColor(i, pixels.Color(rgb[0], rgb[1], rgb[2]));
+        showup();
+    }
+}
+
 /*
  *  Matrix manage
  */
@@ -127,11 +182,7 @@ void swap(int i, int j) {
     int t2 = m[j];
     pixels.setPixelColor(i, pixels.Color(255, 255, 255));
     pixels.setPixelColor(j, pixels.Color(255, 255, 255));
-    if (k ++ == delayval_sp) {
-        k = 0;
-        pixels.show();
-        delay(delayval_q);
-    }
+    showup();
     int rgb1[3], rgb2[3];
     h_to_rgb(m[i], rgb1);
     h_to_rgb(m[j], rgb2);
@@ -141,14 +192,18 @@ void swap(int i, int j) {
     m[j] = t1;
 }
 
-void noswap(int i, int j) {
-    pixels.setPixelColor(i, pixels.Color(255, 255, 255));
-    pixels.setPixelColor(j, pixels.Color(255, 255, 255));
+void showup() {
     if (k ++ == delayval_sp) {
         k = 0;
         pixels.show();
         delay(delayval_q);
     }
+}
+
+void noswap(int i, int j) {
+    pixels.setPixelColor(i, pixels.Color(255, 255, 255));
+    pixels.setPixelColor(j, pixels.Color(255, 255, 255));
+    showup();
     int rgb1[3], rgb2[3];
     h_to_rgb(m[i], rgb1);
     h_to_rgb(m[j], rgb2);

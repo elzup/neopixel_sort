@@ -10,13 +10,13 @@
 
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
-int delayval = 1000;
-int delayval_q = 10;
+const int delayval = 1000;
+const unsigned char delayval_q = 10;
+const unsigned char delayval_sp = 70;
 int k = 0;
-int delayval_sp = 1;
 // int delayval_sp = 70;
 
-int m[256];
+unsigned char m[256];
 
 void setup() {
     pixels.begin();
@@ -27,9 +27,9 @@ void setup() {
 }
 
 void loop() {
-    // bubbleSort();
-    // selectionSort();
-    // quickSort();
+    bubbleSort();
+    selectionSort();
+    quickSort();
     mergeSort();
     Serial.println(".");
 }

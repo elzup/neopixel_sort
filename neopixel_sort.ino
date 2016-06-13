@@ -1,4 +1,5 @@
 #include <Adafruit_NeoPixel.h>
+#include <new.h>
 #ifdef __AVR__
   #include <avr/power.h>
 #endif
@@ -7,13 +8,14 @@
 
 #define PIN 6
 #define NUMPIXELS 256
+#define DELAYVAL_SP_DEF 255
 
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
 const int delayval = 1000;
 unsigned char delayval_q = 1;
-unsigned char delayval_sp = 70;
-int k = 0;
+unsigned char delayval_sp = DELAYVAL_SP_DEF;
+unsigned char k = 0;
 // int delayval_sp = 70;
 
 unsigned char m[256];
@@ -49,6 +51,7 @@ void bubbleSort() {
             }
         }
     }
+    destory();
     pixels.show();
 }
 
@@ -76,7 +79,7 @@ void quickSort() {
     revQuick(0, NUMPIXELS - 1);
     pixels.show();
     delayval_q = 1;
-    delayval_sp = 70;
+    delayval_sp = DELAYVAL_SP_DEF;
 }
 
 void revQuick(int left, int right) {
@@ -114,7 +117,7 @@ void mergeSort() {
     revMerge(0, NUMPIXELS - 1);
     pixels.show();
     delayval_q = 1;
-    delayval_sp = 70;
+    delayval_sp = DELAYVAL_SP_DEF;
 }
 
 void revMerge(int left, int right) {
@@ -172,8 +175,13 @@ void initialize() {
         m[i] = i * (360 / NUMPIXELS);
     }
     showPixels();
-    delay(delayval);
+    // delay(delayval);
 }
+
+void destory() {
+    delete m;
+}
+
 
 void shuffle() {
     for (int i = 0; i < NUMPIXELS - 1; i++) {

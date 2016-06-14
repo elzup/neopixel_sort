@@ -4,16 +4,14 @@
   #include <avr/power.h>
 #endif
 
-#define REP(i,n) for(int i=0;i<n;i++)
-
 #define PIN 6
 #define NUMPIXELS 256
 #define DELAYVAL_SP_DEF 255
 #define LIGHT_OFF_RATE 0.2
+#define DELAY_VAL 1000
 
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
-const int delayval = 1000;
 unsigned char delayval_q = 1;
 unsigned char delayval_sp = DELAYVAL_SP_DEF;
 unsigned char k = 0;
@@ -25,14 +23,14 @@ void setup() {
     pixels.begin();
     Serial.begin(9600);
     Serial.println("start");
-    pixels.setBrightness(10);
+    pixels.setBrightness(20);
     randomSeed(analogRead(0));
 }
 
 void loop() {
-    while (true) {heapSort();}
     bubbleSort();
     selectionSort();
+    insertionSort();
     mergeSort();
     quickSort();
     heapSort();
@@ -44,9 +42,10 @@ void loop() {
  */
 void bubbleSort() {
     initialize();
+    set_delay(1, DELAYVAL_SP_DEF);
     shuffle();
-    REP(i, NUMPIXELS) {
-        REP(j, NUMPIXELS - 1 - i) {
+    for (int i = 0; i < NUMPIXELS; i++) {
+        for (int j = 0; j < NUMPIXELS - 1 - i; j++) {
             if (m[j] > m[j + 1]) {
                 swap(j, j + 1);
             } else {
@@ -60,8 +59,9 @@ void bubbleSort() {
 
 void selectionSort() {
     initialize();
+    set_delay(1, DELAYVAL_SP_DEF);
     shuffle();
-    REP(i, NUMPIXELS - 1) {
+    for (int i = 0; i < NUMPIXELS - 1; ++i) {
         int sm = i;
         for (int j = i + 1; j < NUMPIXELS; j++) {
             if (m[j] < m[sm]) {
@@ -75,16 +75,26 @@ void selectionSort() {
     destory();
 }
 
-void quickSort() {
-    delayval_q = 30;
-    delayval_sp = 5;
+void insertionSort() {
     initialize();
+    set_delay(1, 20);
+    shuffle();
+    for (int i = 1; i < NUMPIXELS; i++) {
+        for (int j = i - 1; j >= 0 && m[j] > m[j + 1]; j--) {
+            swap(j, j + 1);
+        }
+    }
+    pixels.show();
+    destory();
+}
+
+void quickSort() {
+    initialize();
+    set_delay(30, 5);
     shuffle();
     revQuick(0, NUMPIXELS - 1);
     pixels.show();
     destory();
-    delayval_q = 1;
-    delayval_sp = DELAYVAL_SP_DEF;
 }
 
 void revQuick(int left, int right) {
@@ -115,15 +125,12 @@ void revQuick(int left, int right) {
 }
 
 void mergeSort() {
-    delayval_q = 50;
-    delayval_sp = 5;
     initialize();
+    set_delay(50, 5);
     shuffle();
     revMerge(0, NUMPIXELS - 1);
     pixels.show();
     destory();
-    delayval_q = 1;
-    delayval_sp = DELAYVAL_SP_DEF;
 }
 
 void revMerge(int left, int right) {
@@ -174,24 +181,20 @@ void revMerge(int left, int right) {
 }
 
 void heapSort() {
-    delayval_q = 20;
-    delayval_sp = 1;
     initialize();
+    set_delay(20, 1);
     shuffle();
 
     for (int i = (NUMPIXELS / 2) - 1; i >= 0; i--) {
         shiftDown(i, NUMPIXELS);
     }
-    delayval_q = 1;
-    delayval_sp = 1;
+    set_delay(1, 1);
     for (int i = NUMPIXELS - 1; i >= 1; i--) {
         swap(0, i);
         shiftDown(0, i - 1);
     }
     pixels.show();
     destory();
-    delayval_q = 1;
-    delayval_sp = DELAYVAL_SP_DEF;
 }
 
 void shiftDown(int root, int bottom) {
@@ -217,12 +220,17 @@ void shiftDown(int root, int bottom) {
  *  Matrix manage
  */
 void initialize() {
-    REP(i, NUMPIXELS) {
-        m[i] = i * (360 / NUMPIXELS);
+    for (int i = 0; i < NUMPIXELS; ++i) {
+        m[i] = i;
     }
     showPixels();
     k = 0;
-    // delay(delayval);
+    delay(DELAY_VAL);
+}
+
+void set_delay(int d, int dsp) {
+    delayval_q = d;
+    delayval_sp = dsp;
 }
 
 void destory() {
@@ -238,7 +246,7 @@ void shuffle() {
         m[i] = t;
     }
     showPixels();
-    delay(delayval);
+    delay(DELAY_VAL);
 }
 
 void swap(int i, int j) {
@@ -282,7 +290,7 @@ void noswap(int i, int j) {
 }
 
 void showPixels() {
-    REP(i, NUMPIXELS) {
+    for (int i = 0; i < NUMPIXELS; ++i) {
         int rgb[3];
         h_to_rgb(m[i], rgb);
         pixels.setPixelColor(i, pixels.Color(rgb[0], rgb[1], rgb[2]));
@@ -296,7 +304,8 @@ void showPixels() {
  *  Helpers
  */
 
-void h_to_rgb(int h, int *rgb) {
+void h_to_rgb(int ht, int *rgb) {
+    int h = ht * (360 / NUMPIXELS);
     float r = 0, g = 0, b = 0;
     int i = h / 60;
     float f = (float) h / 60 - (float) i;

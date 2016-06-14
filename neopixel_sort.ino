@@ -4,8 +4,6 @@
   #include <avr/power.h>
 #endif
 
-#define REP(i,n) for(int i=0;i<n;i++)
-
 #define PIN 6
 #define NUMPIXELS 256
 #define DELAYVAL_SP_DEF 255
@@ -30,8 +28,10 @@ void setup() {
 }
 
 void loop() {
+    while (1) { insertionSort(); }
     bubbleSort();
     selectionSort();
+    insertionSort();
     mergeSort();
     quickSort();
     heapSort();
@@ -44,8 +44,8 @@ void loop() {
 void bubbleSort() {
     initialize();
     shuffle();
-    REP(i, NUMPIXELS) {
-        REP(j, NUMPIXELS - 1 - i) {
+    for (int i = 0; i < NUMPIXELS; i++) {
+        for (int j = 0; j < NUMPIXELS - 1 - i; j++) {
             if (m[j] > m[j + 1]) {
                 swap(j, j + 1);
             } else {
@@ -60,7 +60,7 @@ void bubbleSort() {
 void selectionSort() {
     initialize();
     shuffle();
-    REP(i, NUMPIXELS - 1) {
+    for (int i = 0; i < NUMPIXELS - 1; ++i) {
         int sm = i;
         for (int j = i + 1; j < NUMPIXELS; j++) {
             if (m[j] < m[sm]) {
@@ -77,7 +77,7 @@ void selectionSort() {
 void insertionSort() {
     initialize();
     shuffle();
-    REP(i, NUMPIXELS - 1) {
+    for (int i = 0; i < NUMPIXELS - 1; ++i) {
         int sm = i;
         for (int j = i + 1; j < NUMPIXELS; j++) {
             if (m[j] < m[sm]) {
@@ -233,7 +233,7 @@ void shiftDown(int root, int bottom) {
  *  Matrix manage
  */
 void initialize() {
-    REP(i, NUMPIXELS) {
+    for (int i = 0; i < NUMPIXELS; ++i) {
         m[i] = i * (360 / NUMPIXELS);
     }
     showPixels();
@@ -298,7 +298,7 @@ void noswap(int i, int j) {
 }
 
 void showPixels() {
-    REP(i, NUMPIXELS) {
+    for (int i = 0; i < NUMPIXELS; ++i) {
         int rgb[3];
         h_to_rgb(m[i], rgb);
         pixels.setPixelColor(i, pixels.Color(rgb[0], rgb[1], rgb[2]));

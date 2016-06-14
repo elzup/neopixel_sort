@@ -6,16 +6,14 @@
 
 #define PIN 6
 #define NUMPIXELS 256
-#define DELAYVAL_SP_DEF 255
 #define LIGHT_OFF_RATE 0.2
 #define DELAY_VAL 1000
 
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
 unsigned char delayval_q = 1;
-unsigned char delayval_sp = DELAYVAL_SP_DEF;
+unsigned char delayval_sp = 1;
 unsigned char k = 0;
-// int delayval_sp = 70;
 
 unsigned char m[256];
 
@@ -42,7 +40,7 @@ void loop() {
  */
 void bubbleSort() {
     initialize();
-    set_delay(1, DELAYVAL_SP_DEF);
+    set_delay(1, 200);
     shuffle();
     for (int i = 0; i < NUMPIXELS; i++) {
         for (int j = 0; j < NUMPIXELS - 1 - i; j++) {
@@ -59,7 +57,7 @@ void bubbleSort() {
 
 void selectionSort() {
     initialize();
-    set_delay(1, DELAYVAL_SP_DEF);
+    set_delay(1, 200);
     shuffle();
     for (int i = 0; i < NUMPIXELS - 1; ++i) {
         int sm = i;
@@ -90,7 +88,7 @@ void insertionSort() {
 
 void quickSort() {
     initialize();
-    set_delay(30, 5);
+    set_delay(1, 1);
     shuffle();
     revQuick(0, NUMPIXELS - 1);
     pixels.show();
@@ -126,7 +124,7 @@ void revQuick(int left, int right) {
 
 void mergeSort() {
     initialize();
-    set_delay(50, 5);
+    set_delay(3, 1);
     shuffle();
     revMerge(0, NUMPIXELS - 1);
     pixels.show();
@@ -182,7 +180,7 @@ void revMerge(int left, int right) {
 
 void heapSort() {
     initialize();
-    set_delay(20, 1);
+    set_delay(12, 1);
     shuffle();
 
     for (int i = (NUMPIXELS / 2) - 1; i >= 0; i--) {

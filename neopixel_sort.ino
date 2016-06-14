@@ -9,6 +9,7 @@
 #define PIN 6
 #define NUMPIXELS 256
 #define DELAYVAL_SP_DEF 255
+#define LIGHT_OFF_RATE 0.2
 
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
@@ -140,13 +141,13 @@ void revMerge(int left, int right) {
     int stack1[sl1 + 1], stack2[sl2 + 1];
     for (int i = 0; i < sl1; i++) {
         stack1[i] = m[left + i];
-        pixels.setPixelColor(left + i, pixels.Color(30, 30, 30));
+        lightOff(left + i);
     }
     stack1[sl1] = 256;
     stack2[sl2] = 256;
     for (int i = 0; i < sl2; i++) {
         stack2[i] = m[middle + 1 + i];
-        pixels.setPixelColor(middle + 1 + i, pixels.Color(30, 30, 30));
+        lightOff(middle + 1 + i);
     }
     showup();
     int i1 = 0, i2 = 0;
@@ -207,6 +208,12 @@ void swap(int i, int j) {
     pixels.setPixelColor(j, pixels.Color(rgb1[0], rgb1[1], rgb1[2]));
     m[i] = t2;
     m[j] = t1;
+}
+
+void lightOff(int i) {
+    int rgb[3];
+    h_to_rgb(m[i], rgb);
+    pixels.setPixelColor(i, pixels.Color(rgb[0] * LIGHT_OFF_RATE, rgb[1] * LIGHT_OFF_RATE, rgb[2] * LIGHT_OFF_RATE));
 }
 
 void showup() {

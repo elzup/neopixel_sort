@@ -30,7 +30,6 @@ void setup() {
 }
 
 void loop() {
-    while (true) { mergeSort(); };
     bubbleSort();
     selectionSort();
     mergeSort();

@@ -30,10 +30,12 @@ void setup() {
 }
 
 void loop() {
+    while (true) { heapSort(); };
     bubbleSort();
     selectionSort();
     mergeSort();
     quickSort();
+    heapSort();
     Serial.println(".");
 }
 
@@ -165,6 +167,45 @@ void revMerge(int left, int right) {
         h_to_rgb(m[i], rgb);
         pixels.setPixelColor(i, pixels.Color(rgb[0], rgb[1], rgb[2]));
         showup();
+    }
+}
+
+void heapSort() {
+    delayval_q = 50;
+    delayval_sp = 5;
+    initialize();
+    shuffle();
+
+    for (int i = (NUMPIXELS / 2) - 1; i >= 0; i--) {
+        shiftDown(i, NUMPIXELS);
+    }
+    for (int i = NUMPIXELS - 1; i >= 1; i--) {
+        swap(0, i);
+        shiftDown(0, i - 1);
+    }
+
+    pixels.show();
+    delayval_q = 1;
+    delayval_sp = DELAYVAL_SP_DEF;
+}
+
+void shiftDown(int root, int bottom) {
+    int maxChild, temp;
+    while ((root * 2 <= bottom)) {
+        if (root * 2 == bottom) {
+            maxChild = root * 2;
+        } else if (m[root * 2] > m[root * 2 + 1]) {
+            maxChild = root * 2;
+        } else {
+            maxChild = root * 2 + 1;
+        }
+
+        if (m[root] < m[maxChild]) {
+            swap(root, maxChild);
+            root = maxChild;
+        } else {
+            break;
+        }
     }
 }
 

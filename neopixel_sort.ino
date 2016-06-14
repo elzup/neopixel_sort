@@ -30,7 +30,7 @@ void setup() {
 }
 
 void loop() {
-    while (true) { heapSort(); };
+    while (true) {heapSort();}
     bubbleSort();
     selectionSort();
     mergeSort();
@@ -54,8 +54,8 @@ void bubbleSort() {
             }
         }
     }
-    destory();
     pixels.show();
+    destory();
 }
 
 void selectionSort() {
@@ -72,6 +72,7 @@ void selectionSort() {
         swap(i, sm);
     }
     pixels.show();
+    destory();
 }
 
 void quickSort() {
@@ -81,6 +82,7 @@ void quickSort() {
     shuffle();
     revQuick(0, NUMPIXELS - 1);
     pixels.show();
+    destory();
     delayval_q = 1;
     delayval_sp = DELAYVAL_SP_DEF;
 }
@@ -119,6 +121,7 @@ void mergeSort() {
     shuffle();
     revMerge(0, NUMPIXELS - 1);
     pixels.show();
+    destory();
     delayval_q = 1;
     delayval_sp = DELAYVAL_SP_DEF;
 }
@@ -171,20 +174,22 @@ void revMerge(int left, int right) {
 }
 
 void heapSort() {
-    delayval_q = 50;
-    delayval_sp = 5;
+    delayval_q = 20;
+    delayval_sp = 1;
     initialize();
     shuffle();
 
     for (int i = (NUMPIXELS / 2) - 1; i >= 0; i--) {
         shiftDown(i, NUMPIXELS);
     }
+    delayval_q = 1;
+    delayval_sp = 1;
     for (int i = NUMPIXELS - 1; i >= 1; i--) {
         swap(0, i);
         shiftDown(0, i - 1);
     }
-
     pixels.show();
+    destory();
     delayval_q = 1;
     delayval_sp = DELAYVAL_SP_DEF;
 }
@@ -199,7 +204,6 @@ void shiftDown(int root, int bottom) {
         } else {
             maxChild = root * 2 + 1;
         }
-
         if (m[root] < m[maxChild]) {
             swap(root, maxChild);
             root = maxChild;
@@ -217,6 +221,7 @@ void initialize() {
         m[i] = i * (360 / NUMPIXELS);
     }
     showPixels();
+    k = 0;
     // delay(delayval);
 }
 
@@ -258,7 +263,7 @@ void lightOff(int i) {
 }
 
 void showup() {
-    if (k ++ == delayval_sp) {
+    if (k ++ >= delayval_sp) {
         k = 0;
         pixels.show();
         delay(delayval_q);

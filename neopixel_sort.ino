@@ -30,7 +30,6 @@ void setup() {
 }
 
 void loop() {
-    while (true) {heapSort();}
     bubbleSort();
     selectionSort();
     mergeSort();
@@ -59,6 +58,23 @@ void bubbleSort() {
 }
 
 void selectionSort() {
+    initialize();
+    shuffle();
+    REP(i, NUMPIXELS - 1) {
+        int sm = i;
+        for (int j = i + 1; j < NUMPIXELS; j++) {
+            if (m[j] < m[sm]) {
+                sm = j;
+            }
+            noswap(i, sm);
+        }
+        swap(i, sm);
+    }
+    pixels.show();
+    destory();
+}
+
+void insertionSort() {
     initialize();
     shuffle();
     REP(i, NUMPIXELS - 1) {

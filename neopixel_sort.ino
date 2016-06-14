@@ -28,7 +28,6 @@ void setup() {
 }
 
 void loop() {
-    // while (1) { insertionSort(); }
     bubbleSort();
     selectionSort();
     insertionSort();
@@ -78,17 +77,12 @@ void selectionSort() {
 
 void insertionSort() {
     initialize();
-    set_delay(1, DELAYVAL_SP_DEF);
+    set_delay(1, 20);
     shuffle();
-    for (int i = 0; i < NUMPIXELS - 1; ++i) {
-        int sm = i;
-        for (int j = i + 1; j < NUMPIXELS; j++) {
-            if (m[j] < m[sm]) {
-                sm = j;
-            }
-            noswap(i, sm);
+    for (int i = 1; i < NUMPIXELS; i++) {
+        for (int j = i - 1; j >= 0 && m[j] > m[j + 1]; j--) {
+            swap(j, j + 1);
         }
-        swap(i, sm);
     }
     pixels.show();
     destory();

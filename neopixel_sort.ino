@@ -32,6 +32,7 @@ void loop() {
     mergeSort();
     quickSort();
     heapSort();
+    bitnicSort();
     Serial.println(".");
 }
 
@@ -82,29 +83,29 @@ void bitnicSort() {
     destory();
 }
 
-void checkSwap(v1, v2, asc = true) {
+void checkSwap(int v1, int v2, bool asc) {
     if ((m[v1] > m[v2]) != asc) {
-        noswap(v1, v2)
+        noswap(v1, v2);
         return;
     }
-    swap(v1, v2)
+    swap(v1, v2);
 }
 
-void cascade(left, right, asc) {
+void cascade(int left, int right, bool asc) {
     if (left + 1 == right) {
         checkSwap(left, right, asc);
         return;
     }
     int half = (right - left + 1) / 2;
     int middle = left + half;
-    for (let i = 0; i < half; ++i) {
+    for (int i = 0; i < half; ++i) {
         checkSwap(left + i, middle + i, asc);
     };
     cascade(left, middle - 1, asc);
     cascade(middle, right, asc);
 }
 
-void revBitnic(left, right, asc) {
+void revBitnic(int left, int right, bool asc) {
     int half = (right - left + 1) / 2;
     int middle = left + half;
     if (left + 1 == right) {
@@ -276,7 +277,7 @@ void set_delay(int d, int dsp) {
 }
 
 void destory() {
-    delete m;
+    // delete m;
 }
 
 

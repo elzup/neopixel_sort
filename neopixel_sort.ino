@@ -31,6 +31,7 @@ void loop() {
     bubbleSort();
     selectionSort();
     insertionSort();
+    shakerSort();
     mergeSort();
     quickSort();
     heapSort();

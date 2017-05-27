@@ -28,13 +28,14 @@ void setup() {
 }
 
 void loop() {
-    bubbleSort();
-    selectionSort();
-    insertionSort();
-    mergeSort();
-    quickSort();
-    heapSort();
-    bitnicSort();
+    // bubbleSort();
+    // selectionSort();
+    // insertionSort();
+    // mergeSort();
+    // quickSort();
+    // heapSort();
+    // bitnicSort();
+    radixSort();
     Serial.println(".");
 }
 
@@ -323,7 +324,7 @@ void lightOff(int i) {
 }
 
 void showup() {
-    if (k ++ >= delayval_sp) {
+    if (++k >= delayval_sp) {
         k = 0;
         pixels.show();
         delay(delayval_q);

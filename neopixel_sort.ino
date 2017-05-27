@@ -28,13 +28,13 @@ void setup() {
 }
 
 void loop() {
-    // bubbleSort();
-    // selectionSort();
-    // insertionSort();
-    // mergeSort();
-    // quickSort();
-    // heapSort();
-    // bitnicSort();
+    bubbleSort();
+    selectionSort();
+    insertionSort();
+    mergeSort();
+    quickSort();
+    heapSort();
+    bitnicSort();
     radixSort();
     Serial.println(".");
 }
@@ -82,7 +82,7 @@ void selectionSort() {
 void bitnicSort() {
     printText("BITNC");
     initialize();
-    set_delay(1, 1);
+    set_delay(1, 2);
     shuffle();
     revBitnic(0, NUMPIXELS - 1, true);
     pixels.show();
@@ -141,7 +141,7 @@ void insertionSort() {
 void quickSort() {
     printText("QUICK");
     initialize();
-    set_delay(1, 1);
+    set_delay(1, 2);
     shuffle();
     revQuick(0, NUMPIXELS - 1);
     pixels.show();

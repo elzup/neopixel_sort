@@ -19,6 +19,8 @@ unsigned char m[256];
 
 void setup() {
     pixels.begin();
+    pixels.show();
+    delay(DELAY_VAL * 3);
     Serial.begin(9600);
     Serial.println("start");
     pixels.setBrightness(20);

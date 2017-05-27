@@ -1,18 +1,15 @@
-#define NUM_CHARPIXELS 40
+#define NUM_CHARPIXELS 5
+#define NUM_LINES 32
 
 void printText(char *text) {
-    unsigned char b[NUMPIXELS] = {};
-    for (int i = 0; i < NUMPIXELS; ++i) {
-        b[i] = 0;
-    }
+    char b[NUMPIXELS] = {};
     showText(b);
     int k = 0;
-    // sepalate
     for (int i = 0; i < 5; ++i) {
-        k += 8;
-        unsigned char mat[NUM_CHARPIXELS];
+        k ++;
+        char mat[NUM_CHARPIXELS];
         char_to_mat(text[i], mat);
-        for (int j = 0; j < NUM_CHARPIXELS; ++j) {
+        for (int j = 0; j < 5; ++j) {
             b[k++] = mat[j];
         }
     }
@@ -21,274 +18,275 @@ void printText(char *text) {
 
 void char_to_mat(char c, char *mat) {
     if (c == 'A') {
-        unsigned char n[NUM_CHARPIXELS] = {
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 0, 0, 1, 0, 0, 0, 0,
-            0, 0, 0, 0, 1, 0, 0, 1,
-            1, 0, 0, 1, 0, 0, 0, 0,
-            1, 1, 1, 1, 1, 1, 1, 1
+        char n[NUM_CHARPIXELS] = {
+            0x11111111,
+            0x10010000,
+            0x00001001,
+            0x10010000,
+            0x11111111
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     } else if (c == 'B') {
-        unsigned char n[NUM_CHARPIXELS] = {
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 0, 0, 1, 0, 0, 0, 1,
-            1, 0, 0, 0, 1, 0, 0, 1,
-            1, 0, 0, 1, 0, 0, 0, 1,
-            0, 1, 1, 1, 0, 1, 1, 0
+        char n[NUM_CHARPIXELS] = {
+            0x11111111,
+            0x10010001,
+            0x10001001,
+            0x10010001,
+            0x01110110
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     } else if (c == 'C') {
-        unsigned char n[NUM_CHARPIXELS] = {
-            0, 1, 1, 1, 1, 1, 1, 0,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            0, 1, 0, 0, 0, 0, 1, 0
+        char n[NUM_CHARPIXELS] = {
+            0x01111110,
+            0x10000001,
+            0x10000001,
+            0x10000001,
+            0x01000010
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     } else if (c == 'D') {
-        unsigned char n[NUM_CHARPIXELS] = {
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 1, 0,
-            0, 0, 1, 1, 1, 1, 1, 0
+        char n[NUM_CHARPIXELS] = {
+            0x11111111,
+            0x10000001,
+            0x10000001,
+            0x10000010,
+            0x00111110
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     } else if (c == 'E') {
-        unsigned char n[NUM_CHARPIXELS] = {
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 0, 0, 1, 0, 0, 0, 1,
-            1, 0, 0, 0, 1, 0, 0, 1,
-            1, 0, 0, 1, 0, 0, 0, 1,
-            1, 0, 0, 0, 1, 0, 0, 1
+        char n[NUM_CHARPIXELS] = {
+            0x11111111,
+            0x10010001,
+            0x10001001,
+            0x10010001,
+            0x10001001
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     } else if (c == 'F') {
-        unsigned char n[NUM_CHARPIXELS] = {
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 0, 0, 1, 0, 0, 0, 0,
-            0, 0, 0, 0, 1, 0, 0, 1,
-            1, 0, 0, 1, 0, 0, 0, 0,
-            0, 0, 0, 0, 1, 0, 0, 1
+        char n[NUM_CHARPIXELS] = {
+            0x11111111,
+            0x10010000,
+            0x00001001,
+            0x10010000,
+            0x00001001
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     } else if (c == 'G') {
-        unsigned char n[NUM_CHARPIXELS] = {
-            0, 1, 1, 1, 1, 1, 1, 0,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 1, 0, 0, 1,
-            0, 1, 1, 1, 0, 0, 1, 0
+        char n[NUM_CHARPIXELS] = {
+            0x01111110,
+            0x10000001,
+            0x10000001,
+            0x10001001,
+            0x01110010
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     } else if (c == 'H') {
-        unsigned char n[NUM_CHARPIXELS] = {
-            1, 1, 1, 1, 1, 1, 1, 1,
-            0, 0, 0, 0, 1, 0, 0, 0,
-            0, 0, 0, 1, 0, 0, 0, 0,
-            0, 0, 0, 0, 1, 0, 0, 0,
-            1, 1, 1, 1, 1, 1, 1, 1
+        char n[NUM_CHARPIXELS] = {
+            0x11111111,
+            0x00001000,
+            0x00010000,
+            0x00001000,
+            0x11111111
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     } else if (c == 'I') {
-        unsigned char n[NUM_CHARPIXELS] = {
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1
+        char n[NUM_CHARPIXELS] = {
+            0x10000001,
+            0x10000001,
+            0x11111111,
+            0x10000001,
+            0x10000001
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     } else if (c == 'J') {
-        unsigned char n[NUM_CHARPIXELS] = {
-            0, 1, 0, 0, 0, 0, 0, 0,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            0, 1, 1, 1, 1, 1, 1, 1,
-            0, 0, 0, 0, 0, 0, 0, 1
+        char n[NUM_CHARPIXELS] = {
+            0x01000000,
+            0x10000001,
+            0x10000001,
+            0x01111111,
+            0x00000001
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     } else if (c == 'K') {
-        unsigned char n[NUM_CHARPIXELS] = {
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 1, 1, 1, 1, 1, 1, 1
+        char n[NUM_CHARPIXELS] = {
+            0x11111111,
+            0x10000001,
+            0x10000001,
+            0x10000001,
+            0x11111111
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     } else if (c == 'L') {
-        unsigned char n[NUM_CHARPIXELS] = {
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 1, 1, 1, 1, 1, 1, 1
+        char n[NUM_CHARPIXELS] = {
+            0x11111111,
+            0x10000001,
+            0x10000001,
+            0x10000001,
+            0x11111111
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     } else if (c == 'M') {
-        unsigned char n[NUM_CHARPIXELS] = {
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 1, 1, 1, 1, 1, 1, 1
+        char n[NUM_CHARPIXELS] = {
+            0x11111111,
+            0x10000001,
+            0x10000001,
+            0x10000001,
+            0x11111111
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     } else if (c == 'N') {
-        unsigned char n[NUM_CHARPIXELS] = {
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 1, 1, 1, 1, 1, 1, 1
+        char n[NUM_CHARPIXELS] = {
+            0x11111111,
+            0x10000001,
+            0x10000001,
+            0x10000001,
+            0x11111111
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     } else if (c == 'O') {
-        unsigned char n[NUM_CHARPIXELS] = {
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 1, 1, 1, 1, 1, 1, 1
+        char n[NUM_CHARPIXELS] = {
+            0x11111111,
+            0x10000001,
+            0x10000001,
+            0x10000001,
+            0x11111111
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     } else if (c == 'P') {
-        unsigned char n[NUM_CHARPIXELS] = {
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 1, 1, 1, 1, 1, 1, 1
+        char n[NUM_CHARPIXELS] = {
+            0x11111111,
+            0x10000001,
+            0x10000001,
+            0x10000001,
+            0x11111111
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     } else if (c == 'Q') {
-        unsigned char n[NUM_CHARPIXELS] = {
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 1, 1, 1, 1, 1, 1, 1
+        char n[NUM_CHARPIXELS] = {
+            0x11111111,
+            0x10000001,
+            0x10000001,
+            0x10000001,
+            0x11111111
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     } else if (c == 'R') {
-        unsigned char n[NUM_CHARPIXELS] = {
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 1, 1, 1, 1, 1, 1, 1
+        char n[NUM_CHARPIXELS] = {
+            0x11111111,
+            0x10000001,
+            0x10000001,
+            0x10000001,
+            0x11111111
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     } else if (c == 'S') {
-        unsigned char n[NUM_CHARPIXELS] = {
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 1, 1, 1, 1, 1, 1, 1
+        char n[NUM_CHARPIXELS] = {
+            0x11111111,
+            0x10000001,
+            0x10000001,
+            0x10000001,
+            0x11111111
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     } else if (c == 'T') {
-        unsigned char n[NUM_CHARPIXELS] = {
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 1, 1, 1, 1, 1, 1, 1
+        char n[NUM_CHARPIXELS] = {
+            0x11111111,
+            0x10000001,
+            0x10000001,
+            0x10000001,
+            0x11111111
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     } else if (c == 'U') {
-        unsigned char n[NUM_CHARPIXELS] = {
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 1, 1, 1, 1, 1, 1, 1
+        char n[NUM_CHARPIXELS] = {
+            0x11111111,
+            0x10000001,
+            0x10000001,
+            0x10000001,
+            0x11111111
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     } else if (c == 'V') {
-        unsigned char n[NUM_CHARPIXELS] = {
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 1, 1, 1, 1, 1, 1, 1
+        char n[NUM_CHARPIXELS] = {
+            0x11111111,
+            0x10000001,
+            0x10000001,
+            0x10000001,
+            0x11111111
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     } else if (c == 'W') {
-        unsigned char n[NUM_CHARPIXELS] = {
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 1, 1, 1, 1, 1, 1, 1
+        char n[NUM_CHARPIXELS] = {
+            0x11111111,
+            0x10000001,
+            0x10000001,
+            0x10000001,
+            0x11111111
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     } else if (c == 'X') {
-        unsigned char n[NUM_CHARPIXELS] = {
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 1, 1, 1, 1, 1, 1, 1
+        char n[NUM_CHARPIXELS] = {
+            0x11111111,
+            0x10000001,
+            0x10000001,
+            0x10000001,
+            0x11111111
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     } else if (c == 'Y') {
-        unsigned char n[NUM_CHARPIXELS] = {
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 1, 1, 1, 1, 1, 1, 1
+        char n[NUM_CHARPIXELS] = {
+            0x11111111,
+            0x10000001,
+            0x10000001,
+            0x10000001,
+            0x11111111
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     } else if (c == 'Z') {
-        unsigned char n[NUM_CHARPIXELS] = {
-            1, 1, 1, 1, 1, 1, 1, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 1, 1, 1, 1, 1, 1, 1
+        char n[NUM_CHARPIXELS] = {
+            0x11111111,
+            0x10000001,
+            0x10000001,
+            0x10000001,
+            0x11111111
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     }
 }
 
-void showText(unsigned char *b) {
-    int off = pixels.Color(50, 50, 50);
-    int on = pixels.Color(100, 100, 100);
-    for (int i = 0; i < NUMPIXELS; ++i) {
-        pixels.setPixelColor(i, b[i] == 1 ? on : off);
-        pixels.show();
+void showText(char *b) {
+    uint32_t off = pixels.Color(0, 0, 0);
+    uint32_t on = pixels.Color(255, 255, 255);
+    for (int i = 0; i < NUM_LINES; ++i) {
+        for (int j = 0; j < 8; j++) {
+            pixels.setPixelColor(i * 8 + j, b[i] >> j & 1 ? on : off);
+        }
     }
     pixels.show();
     delay(DELAY_VAL * 3);

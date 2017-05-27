@@ -28,8 +28,7 @@ void setup() {
 }
 
 void loop() {
-    printText("FGHIJ");
-    printText("ABCDE");
+    printText("AQ");
     bubbleSort();
     selectionSort();
     insertionSort();

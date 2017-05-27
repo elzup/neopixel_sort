@@ -18,271 +18,168 @@ void printText(char *text) {
 }
 
 void char_to_mat(char c, char *mat) {
-    if (c == 'A') {
-        char n[NUM_CHARPIXELS] = {
+    const char lib[26][NUM_CHARPIXELS] = {
+        {
             0b11111110,
             0b10010000,
             0b00001001,
             0b10010000,
             0b11111110
-        };
-        memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
-        delete n;
-    } else if (c == 'B') {
-        char n[NUM_CHARPIXELS] = {
+        },
+        {
             0b11111111,
             0b10010001,
             0b10001001,
             0b10010001,
             0b01110110
-        };
-        memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
-        delete n;
-    } else if (c == 'C') {
-        char n[NUM_CHARPIXELS] = {
+        }, {
             0b01111110,
             0b10000001,
             0b10000001,
             0b10000001,
             0b01000010
-        };
-        memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
-        delete n;
-    } else if (c == 'D') {
-        char n[NUM_CHARPIXELS] = {
+        }, {
             0b11111111,
             0b10000001,
             0b10000001,
             0b10000010,
             0b00111110
-        };
-        memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
-        delete n;
-    } else if (c == 'E') {
-        char n[NUM_CHARPIXELS] = {
+        }, {
             0b11111111,
             0b10010001,
             0b10001001,
             0b10010001,
             0b10001001
-        };
-        memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
-        delete n;
-    } else if (c == 'F') {
-        char n[NUM_CHARPIXELS] = {
+        }, {
             0b11111111,
-            0b10010000,
-            0b00001001,
-            0b10010000,
-            0b00001001
-        };
-        memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
-        delete n;
-    } else if (c == 'G') {
-        char n[NUM_CHARPIXELS] = {
+                0b10010000,
+                0b00001001,
+                0b10010000,
+                0b00001001
+        }, {
             0b01111110,
-            0b10000001,
-            0b10000001,
-            0b10001001,
-            0b01110010
-        };
-        memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
-        delete n;
-    } else if (c == 'H') {
-        char n[NUM_CHARPIXELS] = {
+                0b10000001,
+                0b10000001,
+                0b10001001,
+                0b01110010
+        }, {
             0b11111111,
-            0b00001000,
-            0b00010000,
-            0b00001000,
-            0b11111111
-        };
-        memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
-        delete n;
-    } else if (c == 'I') {
-        char n[NUM_CHARPIXELS] = {
+                0b00001000,
+                0b00010000,
+                0b00001000,
+                0b11111111
+        }, {
             0b10000001,
-            0b10000001,
-            0b11111111,
-            0b10000001,
-            0b10000001
-        };
-        memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
-        delete n;
-    } else if (c == 'J') {
-        char n[NUM_CHARPIXELS] = {
+                0b10000001,
+                0b11111111,
+                0b10000001,
+                0b10000001
+        }, {
             0b01000000,
-            0b10000001,
-            0b10000001,
-            0b11111110,
-            0b00000001
-        };
-        memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
-        delete n;
-    } else if (c == 'K') {
-        char n[NUM_CHARPIXELS] = {
+                0b10000001,
+                0b10000001,
+                0b11111110,
+                0b00000001
+        }, {
             0b11111111,
-            0b00011000,
-            0b00100100,
-            0b01000010,
-            0b10000001
-        };
-        memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
-        delete n;
-    } else if (c == 'L') {
-        char n[NUM_CHARPIXELS] = {
+                0b00011000,
+                0b00100100,
+                0b01000010,
+                0b10000001
+        }, {
             0b11111111,
-            0b00000001,
-            0b10000000,
-            0b00000001,
-            0b10000000
-        };
-        memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
-        delete n;
-    } else if (c == 'M') {
-        char n[NUM_CHARPIXELS] = {
+                0b00000001,
+                0b10000000,
+                0b00000001,
+                0b10000000
+        }, {
             0b11111111,
-            0b01000000,
-            0b00001100,
-            0b01000000,
-            0b11111111
-        };
-        memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
-        delete n;
-    } else if (c == 'N') {
-        char n[NUM_CHARPIXELS] = {
+                0b01000000,
+                0b00001100,
+                0b01000000,
+                0b11111111
+        }, {
             0b11111111,
-            0b01100000,
-            0b00011000,
-            0b00000110,
-            0b11111111
-        };
-        memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
-        delete n;
-    } else if (c == 'O') {
-        char n[NUM_CHARPIXELS] = {
+                0b01100000,
+                0b00011000,
+                0b00000110,
+                0b11111111
+        }, {
             0b01111110,
-            0b10000001,
-            0b10000001,
-            0b10000001,
-            0b01111110
-        };
-        memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
-        delete n;
-    } else if (c == 'P') {
-        char n[NUM_CHARPIXELS] = {
+                0b10000001,
+                0b10000001,
+                0b10000001,
+                0b01111110
+        }, {
             0b11111111,
-            0b10010000,
-            0b00001001,
-            0b10010000,
-            0b00000110
-        };
-        memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
-        delete n;
-    } else if (c == 'Q') {
-        char n[NUM_CHARPIXELS] = {
-            0b11111111,
-            0b10000101,
-            0b10100001,
+                0b10010000,
+                0b00001001,
+                0b10010000,
+                0b00000110
+        }, {
             0b01111110,
-            0b10000000
-        };
-        memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
-        delete n;
-    } else if (c == 'R') {
-        char n[NUM_CHARPIXELS] = {
+                0b10000101,
+                0b10100001,
+                0b01111110,
+                0b10000000
+        }, {
             0b11111111,
-            0b10011000,
-            0b00101001,
-            0b10010011,
-            0b10000110
-        };
-        memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
-        delete n;
-    } else if (c == 'S') {
-        char n[NUM_CHARPIXELS] = {
+                0b10011000,
+                0b00101001,
+                0b10010011,
+                0b10000110
+        }, {
             0b01000110,
-            0b10010001,
-            0b10011001,
-            0b10001001,
-            0b01100010
-        };
-        memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
-        delete n;
-    } else if (c == 'T') {
-        char n[NUM_CHARPIXELS] = {
+                0b10010001,
+                0b10011001,
+                0b10001001,
+                0b01100010
+        }, {
             0b00000001,
-            0b10000000,
-            0b11111111,
-            0b10000000,
-            0b00000001
-        };
-        memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
-        delete n;
-    } else if (c == 'U') {
-        char n[NUM_CHARPIXELS] = {
+                0b10000000,
+                0b11111111,
+                0b10000000,
+                0b00000001
+        }, {
             0b01111111,
-            0b00000001,
-            0b10000000,
-            0b00000001,
-            0b01111111
-        };
-        memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
-        delete n;
-    } else if (c == 'V') {
-        char n[NUM_CHARPIXELS] = {
+                0b00000001,
+                0b10000000,
+                0b00000001,
+                0b01111111
+        }, {
             0b00001111,
-            0b00001110,
-            0b10000000,
-            0b00001110,
-            0b00001111
-        };
-        memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
-        delete n;
-    } else if (c == 'W') {
-        char n[NUM_CHARPIXELS] = {
+                0b00001110,
+                0b10000000,
+                0b00001110,
+                0b00001111
+        }, {
             0b01111111,
-            0b00000001,
-            0b11111110,
-            0b00000001,
-            0b01111111
-        };
-        memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
-        delete n;
-    } else if (c == 'X') {
-        char n[NUM_CHARPIXELS] = {
+                0b00000001,
+                0b11111110,
+                0b00000001,
+                0b01111111
+        }, {
             0b11000011,
-            0b00100100,
-            0b00011000,
-            0b00100100,
-            0b11000011
-        };
-        memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
-        delete n;
-    } else if (c == 'Y') {
-        char n[NUM_CHARPIXELS] = {
+                0b00100100,
+                0b00011000,
+                0b00100100,
+                0b11000011
+        }, {
             0b00000011,
-            0b00100000,
-            0b11111000,
-            0b00100000,
-            0b00000011
-        };
-        memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
-        delete n;
-    } else if (c == 'Z') {
-        char n[NUM_CHARPIXELS] = {
+                0b00100000,
+                0b11111000,
+                0b00100000,
+                0b00000011
+        }, {
             0b10000001,
-            0b10000111,
-            0b10011001,
-            0b11100001,
-            0b10000001
-        };
-        memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
-        delete n;
-    } else {
-        char n[NUM_CHARPIXELS] = {};
-        memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
-        delete n;
-    }
+                0b10000111,
+                0b10011001,
+                0b11100001,
+                0b10000001
+        }
+    };
+
+    memcpy(mat, lib[(int)c - 65], sizeof(char) * NUM_CHARPIXELS);
 }
 
 void showText(char *b) {

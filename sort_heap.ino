@@ -2,13 +2,13 @@
 void heapSort() {
     printText("HEAP ");
     initialize();
-    set_delay(12, 1);
     shuffle();
 
+    set_delay(1, 1);
     for (int i = (NUMPIXELS / 2) - 1; i >= 0; i--) {
         shiftDown(i, NUMPIXELS);
     }
-    set_delay(1, 1);
+    set_delay(1, 10);
     for (int i = NUMPIXELS - 1; i >= 1; i--) {
         swap(0, i, true);
         shiftDown(0, i - 1);

@@ -26,7 +26,7 @@ void setup() {
 }
 
 void loop() {
-    printText("ABABA");
+    printText("ABCDE");
     bubbleSort();
     selectionSort();
     insertionSort();

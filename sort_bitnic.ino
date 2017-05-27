@@ -8,14 +8,6 @@ void bitnicSort() {
     destory();
 }
 
-void checkSwap(int v1, int v2, bool asc) {
-    if ((m[v1] > m[v2]) != asc) {
-        noswap(v1, v2);
-        return;
-    }
-    swap(v1, v2);
-}
-
 void cascade(int left, int right, bool asc) {
     if (left + 1 == right) {
         checkSwap(left, right, asc);

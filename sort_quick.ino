@@ -17,17 +17,17 @@ void revQuick(int left, int right) {
     int pivot = m[left];
     while (true) {
         while (m[i] < pivot) {
-            noswap(i, left);
+            swap(i, left, false);
             i++;
         }
         while (pivot < m[j]) {
-            noswap(left, j);
+            swap(left, j, false);
             j--;
         }
         if (i >= j) {
             break;
         }
-        swap(i, j);
+        swap(i, j, true);
         i ++;
         j --;
     }

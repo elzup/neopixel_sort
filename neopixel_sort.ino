@@ -31,6 +31,7 @@ void loop() {
     bubbleSort();
     selectionSort();
     insertionSort();
+    shakerSort();
     mergeSort();
     quickSort();
     heapSort();
@@ -72,21 +73,6 @@ void shuffle() {
     delay(DELAY_VAL);
 }
 
-void swap(int i, int j) {
-    int t1 = m[i];
-    int t2 = m[j];
-    pixels.setPixelColor(i, pixels.Color(255, 255, 255));
-    pixels.setPixelColor(j, pixels.Color(255, 255, 255));
-    showup();
-    int rgb1[3], rgb2[3];
-    h_to_rgb(m[i], rgb1);
-    h_to_rgb(m[j], rgb2);
-    pixels.setPixelColor(i, pixels.Color(rgb2[0], rgb2[1], rgb2[2]));
-    pixels.setPixelColor(j, pixels.Color(rgb1[0], rgb1[1], rgb1[2]));
-    m[i] = t2;
-    m[j] = t1;
-}
-
 void lightOff(int i) {
     int rgb[3];
     h_to_rgb(m[i], rgb);
@@ -101,15 +87,28 @@ void showup() {
     }
 }
 
-void noswap(int i, int j) {
+void checkSwap(int v1, int v2, bool asc) {
+    swap(v1, v2, (m[v1] > m[v2]) == asc);
+}
+
+void swap(int i, int j, bool doit) {
     pixels.setPixelColor(i, pixels.Color(255, 255, 255));
     pixels.setPixelColor(j, pixels.Color(255, 255, 255));
     showup();
     int rgb1[3], rgb2[3];
     h_to_rgb(m[i], rgb1);
     h_to_rgb(m[j], rgb2);
-    pixels.setPixelColor(i, pixels.Color(rgb1[0], rgb1[1], rgb1[2]));
-    pixels.setPixelColor(j, pixels.Color(rgb2[0], rgb2[1], rgb2[2]));
+    if (!doit) {
+        pixels.setPixelColor(i, pixels.Color(rgb1[0], rgb1[1], rgb1[2]));
+        pixels.setPixelColor(j, pixels.Color(rgb2[0], rgb2[1], rgb2[2]));
+        return;
+    }
+    pixels.setPixelColor(i, pixels.Color(rgb2[0], rgb2[1], rgb2[2]));
+    pixels.setPixelColor(j, pixels.Color(rgb1[0], rgb1[1], rgb1[2]));
+
+    int t = m[i];
+    m[i] = m[j];
+    m[j] = t;
 }
 
 void showPixels() {

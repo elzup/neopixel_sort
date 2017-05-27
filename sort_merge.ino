@@ -11,11 +11,7 @@ void mergeSort() {
 
 void revMerge(int left, int right) {
     if (right - left <= 2) {
-        if (m[left] > m[right]) {
-            swap(left, right);
-        } else {
-            noswap(left, right);
-        }
+        swap(left, right, m[left] > m[right]);
         return;
     }
     int middle = (left + right) / 2;

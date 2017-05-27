@@ -26,6 +26,7 @@ void setup() {
 }
 
 void loop() {
+    printText();
     bubbleSort();
     selectionSort();
     insertionSort();

@@ -9,9 +9,9 @@ void selectionSort() {
             if (m[j] < m[sm]) {
                 sm = j;
             }
-            noswap(i, sm);
+            swap(i, sm, false);
         }
-        swap(i, sm);
+        swap(i, sm, true);
     }
     pixels.show();
     destory();

@@ -9,19 +9,11 @@ void shakerSort() {
 
     for (int i = 0; i < NUMPIXELS; i++) {
         for (int j = left; j < right; j++) {
-            if (m[j] > m[j + 1]) {
-                swap(j, j + 1);
-            } else {
-                noswap(j, j + 1);
-            }
+            swap(j, j + 1, m[j] > m[j + 1]);
         }
         right --;
         for (int j = right; j > left; j-- ){
-            if (m[j] < m[j - 1]) {
-                swap(j, j - 1);
-            } else {
-                noswap(j, j - 1);
-            }
+            swap(j, j - 1, m[j] < m[j - 1]);
         }
         left ++;
     }

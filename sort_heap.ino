@@ -10,7 +10,7 @@ void heapSort() {
     }
     set_delay(1, 1);
     for (int i = NUMPIXELS - 1; i >= 1; i--) {
-        swap(0, i);
+        swap(0, i, true);
         shiftDown(0, i - 1);
     }
     pixels.show();
@@ -28,7 +28,7 @@ void shiftDown(int root, int bottom) {
             maxChild = root * 2 + 1;
         }
         if (m[root] < m[maxChild]) {
-            swap(root, maxChild);
+            swap(root, maxChild, true);
             root = maxChild;
         } else {
             break;

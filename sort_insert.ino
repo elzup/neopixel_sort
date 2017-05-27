@@ -5,7 +5,7 @@ void insertionSort() {
     shuffle();
     for (int i = 1; i < NUMPIXELS; i++) {
         for (int j = i - 1; j >= 0 && m[j] > m[j + 1]; j--) {
-            swap(j, j + 1);
+            swap(j, j + 1, true);
         }
     }
     pixels.show();

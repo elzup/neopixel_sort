@@ -19,6 +19,8 @@ unsigned char m[256];
 
 void setup() {
     pixels.begin();
+    pixels.show();
+    delay(DELAY_VAL * 3);
     Serial.begin(9600);
     Serial.println("start");
     pixels.setBrightness(20);
@@ -26,7 +28,6 @@ void setup() {
 }
 
 void loop() {
-    printText();
     bubbleSort();
     selectionSort();
     insertionSort();
@@ -41,6 +42,7 @@ void loop() {
  *  Sort algorism
  */
 void bubbleSort() {
+    printText("BUBBL");
     initialize();
     set_delay(1, 200);
     shuffle();
@@ -58,6 +60,7 @@ void bubbleSort() {
 }
 
 void selectionSort() {
+    printText("SELEC");
     initialize();
     set_delay(1, 200);
     shuffle();
@@ -76,6 +79,7 @@ void selectionSort() {
 }
 
 void bitnicSort() {
+    printText("BITNC");
     initialize();
     set_delay(1, 1);
     shuffle();
@@ -120,6 +124,7 @@ void revBitnic(int left, int right, bool asc) {
 
 
 void insertionSort() {
+    printText("INSER");
     initialize();
     set_delay(1, 20);
     shuffle();
@@ -133,6 +138,7 @@ void insertionSort() {
 }
 
 void quickSort() {
+    printText("QUICK");
     initialize();
     set_delay(1, 1);
     shuffle();
@@ -169,6 +175,7 @@ void revQuick(int left, int right) {
 }
 
 void mergeSort() {
+    printText("MERGE");
     initialize();
     set_delay(3, 1);
     shuffle();
@@ -225,6 +232,7 @@ void revMerge(int left, int right) {
 }
 
 void heapSort() {
+    printText("HEAP ");
     initialize();
     set_delay(12, 1);
     shuffle();
@@ -278,7 +286,7 @@ void set_delay(int d, int dsp) {
 }
 
 void destory() {
-    // delete m;
+    delete m;
 }
 
 

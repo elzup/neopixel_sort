@@ -26,6 +26,8 @@ void setup() {
 }
 
 void loop() {
+    printText("FGHIJ");
+    printText("ABCDE");
     bubbleSort();
     selectionSort();
     insertionSort();
@@ -40,7 +42,6 @@ void loop() {
  *  Sort algorism
  */
 void bubbleSort() {
-    printText("ABCDE");
     initialize();
     set_delay(1, 200);
     shuffle();

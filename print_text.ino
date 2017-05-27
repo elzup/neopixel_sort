@@ -1,8 +1,11 @@
-#define NUMPIXELS 256
 #define NUM_CHARPIXELS 40
 
 void printText(char *text) {
-    unsigned char b[256] = {};
+    unsigned char b[NUMPIXELS] = {};
+    for (int i = 0; i < NUMPIXELS; ++i) {
+        b[i] = 0;
+    }
+    showText(b);
     int k = 0;
     // sepalate
     for (int i = 0; i < 5; ++i) {
@@ -79,41 +82,41 @@ void char_to_mat(char c, char *mat) {
         delete n;
     } else if (c == 'G') {
         unsigned char n[NUM_CHARPIXELS] = {
-            1, 1, 1, 1, 1, 1, 1, 1,
+            0, 1, 1, 1, 1, 1, 1, 0,
             1, 0, 0, 0, 0, 0, 0, 1,
             1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 1, 1, 1, 1, 1, 1, 1
+            1, 0, 0, 0, 1, 0, 0, 1,
+            0, 1, 1, 1, 0, 0, 1, 0
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     } else if (c == 'H') {
         unsigned char n[NUM_CHARPIXELS] = {
             1, 1, 1, 1, 1, 1, 1, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
+            0, 0, 0, 0, 1, 0, 0, 0,
+            0, 0, 0, 1, 0, 0, 0, 0,
+            0, 0, 0, 0, 1, 0, 0, 0,
             1, 1, 1, 1, 1, 1, 1, 1
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     } else if (c == 'I') {
         unsigned char n[NUM_CHARPIXELS] = {
+            1, 0, 0, 0, 0, 0, 0, 1,
+            1, 0, 0, 0, 0, 0, 0, 1,
             1, 1, 1, 1, 1, 1, 1, 1,
             1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 1, 1, 1, 1, 1, 1, 1
+            1, 0, 0, 0, 0, 0, 0, 1
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
     } else if (c == 'J') {
         unsigned char n[NUM_CHARPIXELS] = {
-            1, 1, 1, 1, 1, 1, 1, 1,
+            0, 1, 0, 0, 0, 0, 0, 0,
             1, 0, 0, 0, 0, 0, 0, 1,
             1, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 1,
-            1, 1, 1, 1, 1, 1, 1, 1
+            0, 1, 1, 1, 1, 1, 1, 1,
+            0, 0, 0, 0, 0, 0, 0, 1
         };
         memcpy(mat, n, sizeof(char) * NUM_CHARPIXELS);
         delete n;
@@ -281,13 +284,12 @@ void char_to_mat(char c, char *mat) {
 }
 
 void showText(unsigned char *b) {
+    int off = pixels.Color(50, 50, 50);
+    int on = pixels.Color(100, 100, 100);
     for (int i = 0; i < NUMPIXELS; ++i) {
-        if (b[i] == 1) {
-            pixels.setPixelColor(i, pixels.Color(255, 255, 0));
-        } else {
-            pixels.setPixelColor(i, pixels.Color(0, 255, 255));
-        }
+        pixels.setPixelColor(i, b[i] == 1 ? on : off);
+        pixels.show();
     }
     pixels.show();
-    delay(5000);
+    delay(DELAY_VAL * 3);
 }

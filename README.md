@@ -1,7 +1,7 @@
 # Sort Algorithm Visualizer
 ![https://elzup.com/images/product/sc_sortvisualizer.png](https://elzup.com/images/product/sc_sortvisualizer.png)
 
-Movie https://www.youtube.com/watch?v=o3NcwVeke0o
+Movie https://www.youtube.com/watch?v=_RJYTBxJbaw
 
 * Bubble sort
 * Selection sort
